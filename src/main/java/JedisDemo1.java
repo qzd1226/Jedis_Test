@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Test;
 import redis.clients.jedis.Jedis;
 import java.util.*;
 public class JedisDemo1 {
@@ -39,5 +40,26 @@ public class JedisDemo1 {
         //2) "no"
         //127.0.0.1:6379>
         jedis.close();
+    }
+    @Test
+    public void demo2(){
+        Jedis jedis = new Jedis("192.168.1.89",6379);
+        jedis.lpush("key1","lucy","mary","jack");
+        List<String> values = jedis.lrange("key1",0,-1);
+        for(String key:values){
+            System.out.println(key);
+        }
+        jedis.close();
+    }
+    @Test
+    public void demo3(){
+        Jedis jedis = new Jedis("192.168.1.89",6379);
+        jedis.sadd("name", "lucy","jack");
+        Set<String> smembers = jedis.smembers("name");
+        for(String order: smembers){
+            System.out.println(order);
+        }
+        jedis.close();
+
     }
 }
