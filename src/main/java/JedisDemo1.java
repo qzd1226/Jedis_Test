@@ -60,6 +60,12 @@ public class JedisDemo1 {
             System.out.println(order);
         }
         jedis.close();
-
+    }
+    @Test
+    public void demo4(){
+        Jedis jedis = new Jedis("192.168.1.89",6379);
+        jedis.hset("users","age","20");
+        String hget = jedis.hget("users","age");
+        System.out.println(hget);
     }
 }
